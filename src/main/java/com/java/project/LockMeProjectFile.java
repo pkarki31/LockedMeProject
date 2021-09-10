@@ -33,11 +33,13 @@ public class LockMeProjectFile {
 
             System.out.println(list.get(i)+"\n");
 
+
         }
 
 
     }
 
+    // Method which will add a File to FileDirectory
     public static void addFile(String fileName){
 
         try {
@@ -51,6 +53,68 @@ public class LockMeProjectFile {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+    }
+
+    // Method which will delete a File from FileDirectory
+    public static void deleteFile(String fileName){
+        File file = new File("FileDirectory/"+fileName);
+
+        if(file.delete())
+        {
+            System.out.println("\n"+fileName+" file deleted successfully");
+        }
+        else
+        {
+            System.out.println("\n"+fileName+" not found in directory since Failed to delete the file");
+        }
+    }
+
+    // Method which will search a File from FileDirectory
+    public static void searchFile(String fileName){
+
+        File folder = new File("FileDirectory");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> list = new ArrayList<String>();
+
+        for(File file : listOfFiles){
+
+            list.add(file.getName());
+        }
+
+        Collections.sort(list);
+
+        for(int i=0;i<list.size();i++){
+
+            if(fileName.equalsIgnoreCase(list.get(i))){
+
+                System.out.println(list.get(i)+" < < < < here is your file "+"\n");
+            }
+
+            else {
+                System.out.println(list.get(i) + "\n");
+
+            }
+
+
+        }
+
+
+
+//            if(list.contains(fileName)) {
+//
+//                System.out.println("\n" + "Yes " + fileName + " is currently present in directory."+"\n");
+//
+//            }
+//
+//            else{
+//                System.out.println("\n"+" Sorry "+fileName+" not present in directory."+"\n");
+//            }
+
+
+
+
+
 
     }
 
@@ -70,11 +134,6 @@ public class LockMeProjectFile {
 
         System.out.println("\n");
     }
-
-
-
-
-
 
     public static void main(String [] args){
 
@@ -96,6 +155,7 @@ public class LockMeProjectFile {
 
             while (choice.equalsIgnoreCase("List") || choice.equalsIgnoreCase("Add") ||
 
+                    choice.equalsIgnoreCase("Delete") || choice.equalsIgnoreCase("Search")  ||
                     choice.equalsIgnoreCase("Exit")) {
 
                 if (choice.equalsIgnoreCase("List")) {
@@ -117,9 +177,23 @@ public class LockMeProjectFile {
 
                 } else if (choice.equalsIgnoreCase("Delete")) {
 
+                    System.out.println("Enter File name you want to delete with correct extension :");
+                    Scanner scDelete = new Scanner(System.in);
+                    String filename = scDelete.next();
+                    deleteFile(filename);
+                    System.out.println("Below is current list of files in Directory :"+"\n");
+                    listAllFiles();
+                    askAction();
+
 
                 } else if (choice.equalsIgnoreCase("Search")) {
 
+
+                    System.out.println("Enter File name you want to search with correct extension :");
+                    Scanner scDelete = new Scanner(System.in);
+                    String filename = scDelete.next();
+                    searchFile(filename);
+                    askAction();
 
                 } else if (choice.equalsIgnoreCase("Exit")) {
 
