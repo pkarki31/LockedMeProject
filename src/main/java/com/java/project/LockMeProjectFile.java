@@ -14,8 +14,14 @@ public class LockMeProjectFile {
 
     static Scanner sc = new Scanner(System.in);
 
+    static MenuOptions mo= new MenuOptions();
+
+
+
     // Method which will displace all list of files
     public static void listAllFiles(){
+
+        System.out.println("Below are current list of Files in Directory"+"\n");
 
         File folder = new File("FileDirectory");
         File[] listOfFiles = folder.listFiles();
@@ -99,33 +105,16 @@ public class LockMeProjectFile {
 
         }
 
-
-
-//            if(list.contains(fileName)) {
-//
-//                System.out.println("\n" + "Yes " + fileName + " is currently present in directory."+"\n");
-//
-//            }
-//
-//            else{
-//                System.out.println("\n"+" Sorry "+fileName+" not present in directory."+"\n");
-//            }
-
-
-
-
-
-
     }
 
     public static void askAction(){
 
-        System.out.println("Please enter what action you want to perform from below options : "+"\n");
+        System.out.println("\n"+"***** Please enter what action you want to perform from below options  ***** "+"\n");
 
         System.out.println("Add  new File : Enter 'Add' "+"\n");
         System.out.println("Delete a File : Enter 'Delete' "+"\n");
         System.out.println("Search a File : Enter 'Search' "+"\n");
-        System.out.println("List All Files: Enter 'List' "+"\n");
+        System.out.println("Go Back to Main Menu: Enter 'Back' "+"\n");
         System.out.println("Exit from program : Enter 'Exit' "+"\n");
 
          sc = new Scanner(System.in);
@@ -133,84 +122,65 @@ public class LockMeProjectFile {
         choice = sc.next();
 
         System.out.println("\n");
+
+        actionImpl();
     }
 
-    public static void main(String [] args){
+    public static void actionImpl(){
 
-        System.out.println("********   Welcome to LockedMe.com   ********"+"\n");
+        while (choice.equalsIgnoreCase("Back") || choice.equalsIgnoreCase("Add") ||
 
+                choice.equalsIgnoreCase("Delete") || choice.equalsIgnoreCase("Search") ||
+                choice.equalsIgnoreCase("Exit")) {
 
-        System.out.println("Developer Details ");
+            if (choice.equalsIgnoreCase("Back")) {
 
-        System.out.println("Name : Pankaj Singh Karki"+"\n"+"Email: pankaj.karki31@gmail.com"+"\n");
+                mo.method();
 
-        System.out.println("Below are current list of Files in Directory"+"\n");
+            } else if (choice.equalsIgnoreCase("Add")) {
 
-
-        listAllFiles();
-
-        System.out.println("\n");
-
-        askAction();
-
-            while (choice.equalsIgnoreCase("List") || choice.equalsIgnoreCase("Add") ||
-
-                    choice.equalsIgnoreCase("Delete") || choice.equalsIgnoreCase("Search")  ||
-                    choice.equalsIgnoreCase("Exit")) {
-
-                if (choice.equalsIgnoreCase("List")) {
-
-                    System.out.println(" Below are current list of File :" + "\n");
-                    listAllFiles();
-                    askAction();
-
-                } else if (choice.equalsIgnoreCase("Add")) {
-
-                    System.out.println("Enter File name you want to create with extension e.g : .txt , .xls or .csv ");
-                    Scanner scAdd = new Scanner(System.in);
-                    String filename = scAdd.next();
-                    addFile(filename);
-                    System.out.println("Below is current list of files in Directory :"+"\n");
-                    listAllFiles();
-                    askAction();
+                System.out.println("Enter File name you want to create with extension e.g : .txt , .xls or .csv ");
+                Scanner scAdd = new Scanner(System.in);
+                String filename = scAdd.next();
+                addFile(filename);
+                System.out.println("Below is current list of files in Directory :" + "\n");
+                listAllFiles();
+                askAction();
 
 
-                } else if (choice.equalsIgnoreCase("Delete")) {
+            } else if (choice.equalsIgnoreCase("Delete")) {
 
-                    System.out.println("Enter File name you want to delete with correct extension :");
-                    Scanner scDelete = new Scanner(System.in);
-                    String filename = scDelete.next();
-                    deleteFile(filename);
-                    System.out.println("Below is current list of files in Directory :"+"\n");
-                    listAllFiles();
-                    askAction();
+                System.out.println("Enter File name you want to delete with correct extension :");
+                Scanner scDelete = new Scanner(System.in);
+                String filename = scDelete.next();
+                deleteFile(filename);
 
-
-                } else if (choice.equalsIgnoreCase("Search")) {
+                listAllFiles();
+                askAction();
 
 
-                    System.out.println("Enter File name you want to search with correct extension :");
-                    Scanner scDelete = new Scanner(System.in);
-                    String filename = scDelete.next();
-                    searchFile(filename);
-                    askAction();
+            } else if (choice.equalsIgnoreCase("Search")) {
 
-                } else if (choice.equalsIgnoreCase("Exit")) {
 
-                    System.exit(0);
+                System.out.println("Enter File name you want to search with correct extension :");
+                Scanner scDelete = new Scanner(System.in);
+                String filename = scDelete.next();
+                searchFile(filename);
+                askAction();
 
-                } else {
-                    System.out.println("Invalid choice entered . Please try again");
-                }
+            } else if (choice.equalsIgnoreCase("Exit")) {
+
+                System.out.println("\n"+"Thanks for using LockedMe.com !!!  Program exiting ....");
+                System.exit(0);
+
+            } else {
+                System.out.println("Invalid choice entered . Please try again");
+                askAction();
             }
+        }
 
-
-
-
-            System.out.println("Invalid choice entered . Please try again");
-
-
-
-
+        System.out.println("\n"+"Invalid choice entered . Please try again");
+        askAction();
     }
+
 }
