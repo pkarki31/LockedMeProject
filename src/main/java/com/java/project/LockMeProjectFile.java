@@ -24,12 +24,13 @@ public class LockMeProjectFile {
         System.out.println("Below are current list of Files in Directory"+"\n");
 
         File folder = new File("FileDirectory");
-        File[] listOfFiles = folder.listFiles();
+
+        String [] listOfFiles = folder.list();
         ArrayList<String> list = new ArrayList<String>();
 
-        for(File file : listOfFiles){
+        for(String file : listOfFiles){
 
-            list.add(file.getName());
+            list.add(file);
 
         }
 
